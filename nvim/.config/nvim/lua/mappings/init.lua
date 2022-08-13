@@ -5,6 +5,7 @@ vim.ui.select({ 'init.lua', 'plugins', 'mappings', 'lsp-config', 'settings'}, {
         return "I'd like to choose " .. item
     end,
 }, function(choice)
+    if choice == nil then return end
     if choice == 'init.lua' then
         vim.cmd(':e ~/.config/nvim/init.lua')
     else

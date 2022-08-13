@@ -18,8 +18,13 @@ return packer.startup(function(use)
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
 
+    -- lint
+    use 'mfussenegger/nvim-lint'
+
     -- treesitter
     use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
+
+    use {'nvim-treesitter/playground'}
 
     -- telescope
     use {
@@ -43,6 +48,8 @@ return packer.startup(function(use)
 
     -- Lua Dev
     -- use '/rafcamlet/nvim-luapad'
+    use 'nanotee/luv-vimdocs'
+    use "milisims/nvim-luaref"
 
     use {'dracula/vim', as='dracula'}
     use 'vim-airline/vim-airline'
