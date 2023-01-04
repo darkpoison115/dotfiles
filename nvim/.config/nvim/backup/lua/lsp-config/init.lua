@@ -7,6 +7,12 @@
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
+--
+--
+function formatBuffer()
+    vim.lsp.buf.format{async=true}
+end
+
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -28,7 +34,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set('n', '<leader>f', formatBuffer, bufopts)
 end
 
 vim.opt.completeopt={'menu','menuone','noselect'}
@@ -91,6 +97,29 @@ cmp.setup.cmdline(':', {
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require('lspconfig')['pylsp'].setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    configurationSources = {"flake8"},
+    formatCommand = {"black"},
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    ignore = {'E203'},
+                    maxLineLength = 88
+                }
+            }
+        }
+    },
+}
+
+require('lspconfig')['phpactor'].setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+--    flags = lsp_flags,
+}
+
+require'lspconfig'.vuels.setup{
     capabilities = capabilities,
     on_attach = on_attach,
 }

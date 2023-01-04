@@ -38,4 +38,4 @@ set.backup = false
 set.undofile = true
 set.undodir = vim.fn.expand('~/.vim/undodir')
 
-set.colorcolumn = '80'
+set.colorcolumn = '89'

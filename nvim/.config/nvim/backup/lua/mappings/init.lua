@@ -24,3 +24,7 @@ vim.keymap.set("n", "<leader>ql", [[<cmd>lua require("persistence").load({ last 
 
 -- stop Persistence => session won't be saved on exit
 vim.keymap.set("n", "<leader>qd", [[<cmd>lua require("persistence").stop()<cr>]])
+
+vim.keymap.set("n", "<leader>l", "<CMD>cnext<CR>")
+vim.keymap.set("n", "<leader>h", "<CMD>cprev<CR>")
+vim.keymap.set("n", "<leader>cc", "<CMD>ccl<CR>")
